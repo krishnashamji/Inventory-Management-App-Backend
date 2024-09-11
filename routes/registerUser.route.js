@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   // Validates incoming request body
   const { error } = validateUser(req.body);
-  if (error) return res.status(400).send(error.details);
+  if (error) return res.status(400).send(error.details[0].message);
 
   // Checks if the user already exists
   let user = await User.findOne({ email: req.body.email });

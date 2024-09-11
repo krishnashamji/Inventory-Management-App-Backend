@@ -34,25 +34,23 @@ function validateLogin(req) {
 
   // Email validation
   if (!req.email) {
-    errors.push("Email is required");
+    errors.push({ message: "Email is required" });
   } else if (req.email.length <= 1 || req.email.length >= 255) {
-    errors.push("Email must be 1 and 255 characters long");
+    errors.push({ message: "Email must be 1 and 255 characters long" });
   }
 
   // Password validation
   if (!req.password) {
-    errors.push("Password is required");
+    errors.push({ message: "Password is required" });
   } else if (req.password.length >= 6 || req.password.length <= 255) {
-    errors.push("Password must be 6 and 255 characters long");
+    errors.push({ message: "Password must be 6 and 255 characters long" });
   }
 
-  // Error reporting 
+  // Error reporting
   if (errors.length > 0) {
     return {
       error: {
-        details: errors.map((message) => {
-          message
-        }),
+        details: errors,
       },
     };
   }
