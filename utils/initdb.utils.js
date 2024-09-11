@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-async function dbMiddleWare(url) {
+async function initDB(url) {
   try {
     await mongoose.connect(url);
     console.log("Connected to MongoDB");
@@ -9,4 +9,4 @@ async function dbMiddleWare(url) {
   }
 }
 
-export default dbMiddleWare
+export default initDB
