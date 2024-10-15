@@ -3,7 +3,7 @@ import userService from "../service/user.service.js";
 
 
 // Login user
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const token = await userService.loginUser(req.body);
     res.status(201).send(token);
@@ -13,7 +13,7 @@ const loginUser = async (req, res) => {
 };
 
 // Register user
-const registerNewUser = async (req, res) => {
+export const registerNewUser = async (req, res) => {
   try {
     const token =  await userService.registerNewUser(req.body);
     res.status(201).send(token);
@@ -23,10 +23,9 @@ const registerNewUser = async (req, res) => {
 };
 
 // Get current user
-const getCurrentUser = async (req, res) => {
+export const getCurrentUser = async (req, res) => {
   // Gets the current user object excluding the password
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 };
 
-export { loginUser, registerNewUser, getCurrentUser };

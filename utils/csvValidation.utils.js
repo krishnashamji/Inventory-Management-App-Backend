@@ -1,5 +1,5 @@
 const validateCSVData = (data) => {
-  const requiredFields = ["Part", "Price", "Quantity"];
+  const requiredFields = ["part", "price", "quantity"];
 
   // Use map to return a new array of objects, with possible errors attached
   return data.map((row) => {
@@ -13,12 +13,12 @@ const validateCSVData = (data) => {
     });
 
     // Validate 'Parts'
-    if (row.Part && (row.Part.length <= 1 || row.Part.length >= 255)) {
+    if (row.part && (row.part.length <= 1 || row.part.length >= 255)) {
       errors.push("Parts must be between 1 and 255 characters");
     }
 
     // Validate 'Price'
-    if (!row.Price) {
+    if (!row.price) {
       errors.push("Price is required");
     }
 

@@ -1,27 +1,27 @@
 import mongoose from "mongoose";
 
 const csvSchema = new mongoose.Schema({
-  Part: {
+  part: {
     type: String,
     required: true,
     minlength: 1,
     maxlength: 255,
   },
-  Price: {
+  price: {
     type: String,
     required: true,
   },
-  Quantity: {
+  quantity: {
     type: Number,
     required: true,
   },
-  Owner: {
+  owner: {
     type: String,
     required: true,
     minlength: 1,
     maxlength: 255,
   },
-  Availability: {
+  availability: {
     type: String,
     enum: ["in-stock", "out of stock"], // Ensures it is either "in-stock" or "out of stock"
     required: true,
