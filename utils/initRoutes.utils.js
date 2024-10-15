@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
-import registerUser from '../routes/registerUser.route.js'
-import loginUser from '../routes/loginUser.route.js'
-
+import userRoute from "../routes/user.route.js"
+import uploadCSVRoute from "../routes/uploadCSV.route.js"
 
 function initRoutes(app) {
-    app.use(express.json())
-    app.use(cors());
-    app.use('/api/registerUser', registerUser)
-    app.use('/api/loginUser', loginUser)
+  app.use(express.json());
+  app.use(cors());
+  app.use("/api/users", userRoute);
+  app.use("/api/uploadCSV", uploadCSVRoute);
 }
 
-export default initRoutes
+export default initRoutes;
