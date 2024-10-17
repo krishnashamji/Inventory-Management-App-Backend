@@ -2,11 +2,10 @@ import { USER_EMAIL_PASSWORD_INVALID, USER_ALREADY_EXISTS } from "../errors.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { validateLogin, validateUser } from "../utils/userValidation.utils.js";
-import config from "../config";
 import { User } from "../models/users.model.js";
+import { jwtPrivateKey } from "../const.js";
 
-
-export async function loginUser(req) {
+async function loginUser(req) {
   // Validates incoming request body
   const { error } = validateLogin(req);
   if (error) throw new Error(error.details[0].message);
@@ -16,21 +15,18 @@ export async function loginUser(req) {
   if (!user) throw new Error(USER_EMAIL_PASSWORD_INVALID);
 
   // Decrypt and compare password
-  const validatePassword = await bcrypt.compare(
-    req.password,
-    user.password
-  );
+  const validatePassword = await bcrypt.compare(req.password, user.password);
   if (!validatePassword) {
     throw new Error(USER_EMAIL_PASSWORD_INVALID);
   }
   // Generate jwt token
-  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
+  const token = jwt.sign({ _id: user._id }, jwtPrivateKey);
 
   // If login is valid send token
   return token;
 }
 
-export async function registerNewUser(req) {
+async function registerNewUser(req) {
   // Validates incoming request body
   const { error } = validateUser(req);
   if (error) throw new Error(error.details[0].message);
@@ -50,7 +46,9 @@ export async function registerNewUser(req) {
   await user.save();
 
   // Generate jwt token
-  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
+  const token = jwt.sign({ _id: user._id }, jwtPrivateKey);
 
   return token;
 }
+
+export { loginUser, registerNewUser };

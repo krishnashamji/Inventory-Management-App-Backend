@@ -5,14 +5,14 @@ function validateLogin(req) {
   // Email validation
   if (!req.email) {
     errors.push({ message: "Email is required" });
-  } else if (req.email.length <= 1 || req.email.length >= 255) {
+  } else if (req.email.length < 1 || req.email.length >= 255) {
     errors.push({ message: "Email must be 1 and 255 characters long" });
   }
 
   // Password validation
   if (!req.password) {
     errors.push({ message: "Password is required" });
-  } else if (req.password.length <= 6 || req.password.length >= 255) {
+  } else if (req.password.length < 6 || req.password.length >= 255) {
     errors.push({ message: "Password must be 6 and 255 characters long" });
   }
 

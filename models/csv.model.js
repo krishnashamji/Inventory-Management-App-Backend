@@ -8,7 +8,7 @@ const csvSchema = new mongoose.Schema({
     maxlength: 255,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   quantity: {
@@ -23,10 +23,10 @@ const csvSchema = new mongoose.Schema({
   },
   availability: {
     type: String,
-    enum: ["in-stock", "out of stock"], // Ensures it is either "in-stock" or "out of stock"
+    enum: ["In-stock", "Out of stock"], // Ensures it is either "in-stock" or "out of stock"
     required: true,
     default: function () {
-      return this.Quantity > 0 ? "in-stock" : "out of stock";
+      return this.Quantity > 0 ? "In-stock" : "Out of stock";
     },
   },
 });

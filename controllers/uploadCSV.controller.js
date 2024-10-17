@@ -1,4 +1,4 @@
-import uploadCSVService from "../service/uploadCSV.service.js";
+import * as uploadCSVService from "../service/uploadCSV.service.js";
 
 export async function uploadCSV(req, res) {
   try {

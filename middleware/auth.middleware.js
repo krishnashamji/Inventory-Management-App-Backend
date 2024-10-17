@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import config from "config";
+import { jwtPrivateKey } from "../const.js"
 
 function auth(req, res, next) {
   const token = req.header("x-login-token");
@@ -10,7 +10,7 @@ function auth(req, res, next) {
 
   try {
     // Decodes token
-    const decoded = jwt.verify(token, config.get("jwtPrivateKey"));
+    const decoded = jwt.verify(token, jwtPrivateKey);
     // Sets payload to be passed on
     req.user = decoded;
     next();
